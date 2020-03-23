@@ -9,7 +9,7 @@ import {
 
 import * as firebase from "firebase";
 
-export default () => {
+export default ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setError] = useState(null);
@@ -23,7 +23,7 @@ export default () => {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.greeting}>{`Seja bem vindo.`}</Text> */}
+      <Text style={styles.greeting}>Entrar</Text>
 
       <View style={styles.errorMessage}>
         <Text style={styles.error}>{errorMessage}</Text>
@@ -58,7 +58,7 @@ export default () => {
 
       <TouchableOpacity
         style={{ alignItems: "center", marginTop: 32 }}
-        onPress={() => this.props.navigation.navigate("RegisterScreen")}
+        onPress={() => navigation.navigate("Register")}
       >
         <Text styles={{ color: "#414959", fontSize: 13 }}>
           É novo?{` `}

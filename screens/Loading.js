@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 
 import * as firebase from "firebase";
 
-export default () => {
-  componentDidMount = () => {
+export default ({ navigation }) => {
+  useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      this.props.navigation.navigate(user ? "App" : "Auth");
+      navigation.navigate(user ? "App" : "Auth");
     });
-  };
+  });
 
   return (
     <View style={styles.container}>

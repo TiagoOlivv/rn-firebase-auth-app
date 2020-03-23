@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import * as firebase from "firebase";
 
 export default () => {
-  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
-  componentDidMount = () => {
-    const [email, name] = firebase.auth().currentUser;
-
-    setEmail(email);
-    setName(name);
-  };
+  useEffect(() => {
+    async function loadData() {
+      const user = await firebase.auth().currentUser;
+      setName(user.displayName);
+      setEmail(user.email);
+    }
+    loadData();
+  });
 
   signOutUser = () => {
     firebase.auth().signOut();
@@ -20,12 +22,11 @@ export default () => {
 
   return (
     <View style={styles.container}>
-      <Text>Olá {email}</Text>
+      <Text>Olá {name}</Text>
 
-      <TouchableOpacity
-        style={{ marginTop: 32 }}
-        onPress={signOutUser}
-      ></TouchableOpacity>
+      <TouchableOpacity style={{ marginTop: 32 }} onPress={signOutUser}>
+        <Text style={styles.logOut}>Sair</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -35,5 +36,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  logOut: {
+    color: "#e9446a",
+    fontWeight: "500"
   }
 });

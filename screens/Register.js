@@ -9,7 +9,7 @@ import {
 
 import * as firebase from "firebase";
 
-export default () => {
+export default ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,9 +29,9 @@ export default () => {
 
   return (
     <View style={styles.container}>
-      <Text
-        style={styles.greeting}
-      >{`Insira seus dados\npara efetuar o cadastro.`}</Text>
+      <Text style={styles.greeting}>
+        {`Insira seus dados\npara efetuar o cadastro.`}
+      </Text>
 
       <View style={styles.errorMessage}>
         <Text style={styles.error}>{errorMessage}</Text>
@@ -74,7 +74,10 @@ export default () => {
         <Text style={styles.singIn}>Cadastrar-se</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={{ alignItems: "center", marginTop: 32 }}>
+      <TouchableOpacity
+        style={{ alignItems: "center", marginTop: 32 }}
+        onPress={() => navigation.goBack()}
+      >
         <Text styles={{ color: "#414959", fontSize: 13 }}>
           Já tem cadastro?{` `}
           <Text style={styles.singUp}>Login</Text>
