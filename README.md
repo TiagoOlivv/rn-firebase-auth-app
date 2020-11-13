@@ -1,2 +1,1 @@
-# my-app
-my app react native
+# React Native Firebase Auth app
